@@ -31,9 +31,17 @@ function getById(id) {
     .where({ id })
     .first(); // return falsey value if null
 };
+
 // Update
 function update(id, updates) {
   return db("accounts")
     .where({ id })
     .update(updates);
 };
+
+// Delete
+function remove(id) {
+  return db("accounts")
+    .where({ id })
+    .delete();
+}
