@@ -41,6 +41,15 @@ router.post("/", validateAccount, async (req, res) => {
     res.status(500).json({ message: "Could not add account" });
   }
 });
+
+router.patch("/:id", validateAccountId, validateUpdate, async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const { name, budget } = req.body;
+    await update(id, { name, budget }); // leave off id if it is passed
+    res.status(204).end();
+  } catch (err) {
+    res.status(500).json({ message: "Could not update account" });
   }
   catch (err) {
     res.status(500).json({ message: "Could not add account" })
