@@ -39,4 +39,15 @@ const getMissingFields = (expectedFields, actualFields) => {
   return formatFieldString(fieldsNotFound);
 }
 
-module.exports = getMissingFields;
+/**
+ * @function isFalseyOrEmpty: Checks if an object is falsey or empty
+ * @param {*} obj: The object to check
+ * @returns {boolean}: True if empty, false if not
+ */
+function isFalseyOrEmpty(obj) {
+  const isFalsey = !obj; // Null, undefined, NaN, false, empty string, or zero
+  const isEmpty = Object.values(obj).length === 0; // Would stringify to '{}'
+  return isFalsey || isEmpty ;
+}
+
+module.exports = { getMissingFields, isFalseyOrEmpty };
