@@ -51,8 +51,15 @@ router.patch("/:id", validateAccountId, validateUpdate, async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "Could not update account" });
   }
-  catch (err) {
-    res.status(500).json({ message: "Could not add account" })
+});
+
+router.delete("/:id", validateAccountId, async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    await remove(id);
+    res.status(204).end();
+  } catch (err) {
+    res.status(500).json({ message: "Could not delete account" });
   }
 });
 
