@@ -97,15 +97,12 @@ function validateAccount(req, res, next) {
   const required = ["name", "budget"];
   const missingFields = getMissingFields(required, Object.keys(req.body));
   if (isFalseyOrEmpty(req.body)) {
-    if (missingFields) {
-      return res.status(400).json({
-        message: `Please provide the ${missingFields} for the account`,
-      });
-    }
-  } else {
     return res.status(400).json({ message: "Missing account data" });
+  } else if (missingFields) {
+    return res.status(400).json({
+      message: `Please provide the ${missingFields} for the account`,
+    });
   }
-
   next();
 }
 
